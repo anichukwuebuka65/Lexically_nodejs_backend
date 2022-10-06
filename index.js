@@ -4,7 +4,7 @@ const proxy = require("./src/proxy")
 const cors = require("cors")
 
 app.use(cors({
-    origin: "http://localhost:3000"
+    origin: "https://lexically.herokuapp.com"
 }))
 app.use("*", proxy)
 
