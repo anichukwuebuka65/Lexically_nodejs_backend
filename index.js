@@ -10,15 +10,15 @@ app.use(cors({
 }))
 
 app.get("/redirect",(req, res) => {
-     res.redirect(`https://unsplash.com/oauth/authorize?client_id=${process.env.client_id}&redirect_uri=http://localhost:5000/user&response_type=code&scope=public+read_user+read_collections`)
+     res.redirect(`https://unsplash.com/oauth/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=http://localhost:5000/user&response_type=code&scope=public+read_user+read_collections`)
 
 })
 
 app.get("/user",(req, res) => {
     if(req.query.code) {
         axios.post("https://unsplash.com/oauth/token",{
-            client_id: process.env.client_id,
-            client_secret: process.env.client_secret,
+            client_id: process.env.CLIENT_ID,
+            client_secret: process.env.CLIENT_SECRET,
             redirect_uri : "http://localhost:5000/user",
             code: req.query.code,
             grant_type: "authorization_code"

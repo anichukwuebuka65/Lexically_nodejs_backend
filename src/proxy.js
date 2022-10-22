@@ -4,7 +4,7 @@ const axios = require("axios")
 
 router.get("/", (req, res) => {
     const params = new URLSearchParams({
-        client_id: process.env.client_id,
+        client_id: process.env.CLIENT_ID,
         ...req.query
     })
     const BASE_URL = `https://api.unsplash.com${req.baseUrl}?${params}`
