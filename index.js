@@ -8,10 +8,12 @@ require("dotenv").config()
 app.use(cors({
     origin: "*"
 }))
+
 app.get("/redirect",(req, res) => {
-     res.redirect(`https://unsplash.com/oauth/authorize?client_id=${process.env.client_id}&redirect_uri=http://localhost:5000/user&response_type=code&scope=read_user+read_collections+write_collections`)
+     res.redirect(`https://unsplash.com/oauth/authorize?client_id=${process.env.client_id}&redirect_uri=http://localhost:5000/user&response_type=code&scope=public+read_user+read_collections`)
 
 })
+
 app.get("/user",(req, res) => {
     if(req.query.code) {
         axios.post("https://unsplash.com/oauth/token",{
