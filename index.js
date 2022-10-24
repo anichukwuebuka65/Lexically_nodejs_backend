@@ -24,7 +24,7 @@ app.get("/user",(req, res) => {
             grant_type: "authorization_code"
         })
         .then(result => {
-            res.redirect(`http://localhost:3000?token=${result.data.access_token}`)
+            res.redirect(`http://localhost:3000/my-collections?token=${result.data.access_token}`)
         })
         .catch(err => {
             console.log(err)
