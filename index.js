@@ -4,13 +4,15 @@ const proxy = require("./src/proxy")
 const cors = require("cors")
 const { default: axios } = require("axios")
 require("dotenv").config()
+const backendUrl = "https://lexically-backend.herokuapp.com"
+const frontendUrl = "https://lexically.herokuapp.com"
 
 app.use(cors({
     origin: "*"
 }))
 
 app.get("/redirect",(req, res) => {
-     res.redirect(`https://unsplash.com/oauth/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=http://localhost:5000/user&response_type=code&scope=public+read_user+read_collections`)
+     res.redirect(`https://unsplash.com/oauth/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${backendUrl}/user&response_type=code&scope=public+read_user+read_collections`)
 
 })
 
@@ -19,18 +21,19 @@ app.get("/user",(req, res) => {
         axios.post("https://unsplash.com/oauth/token",{
             client_id: process.env.CLIENT_ID,
             client_secret: process.env.CLIENT_SECRET,
-            redirect_uri : "http://localhost:5000/user",
+            redirect_uri : `${backendUrl}/user`,
             code: req.query.code,
             grant_type: "authorization_code"
         })
         .then(result => {
-            res.redirect(`http://localhost:3000/my-collections?token=${result.data.access_token}`)
+            res.redirect(`${frontendUrl}/my-collections?token=${result.data.access_token}`)
         })
         .catch(err => {
             console.log(err)
-            res.send(err)})
+            res.redirect(`${frontendUrl}/my-collections?token=error`)
+        })
     } else {
-        res.end("authentication failed")
+        res.redirect(`${frontendUrl}`)
     }
 })
 app.use("*", proxy)
