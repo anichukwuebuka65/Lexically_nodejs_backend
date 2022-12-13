@@ -38,6 +38,7 @@ app.get("/user", (req, res) => {
     res.redirect(`${frontendUrl}`);
   }
 });
+app.get("/hello", () => res.send("hello"));
 app.use("*", proxy);
 
 const PORT = process.env.PORT || 5000;
