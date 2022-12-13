@@ -8,15 +8,16 @@ router.get("/", (req, res) => {
     ...req.query,
   });
   const BASE_URL = `https://api.unsplash.com${req.baseUrl}?${params}`;
-  console.log("hit");
 
   axios
     .get(BASE_URL)
     .then((response) => {
+      console.log("response", response);
       res.header(response.headers);
       res.status(200).json(response.data);
     })
     .catch((err) => {
+      console.log("err", err);
       res.status(500).end(err.message);
     });
 });
