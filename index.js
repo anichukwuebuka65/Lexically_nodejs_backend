@@ -4,7 +4,7 @@ const proxy = require("./src/proxy");
 const cors = require("cors");
 const { default: axios } = require("axios");
 require("dotenv").config();
-const backendUrl = "https://lexically-nodejs-backend.vercel.app/";
+const backendUrl = "https://lexically.onrender.com";
 const frontendUrl = "https://lexically-react-frontend.vercel.app/";
 
 app.options("*", cors());
