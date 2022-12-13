@@ -7,11 +7,7 @@ require("dotenv").config();
 const backendUrl = "https://lexically-nodejs-backend.vercel.app/";
 const frontendUrl = "https://lexically-react-frontend.vercel.app/";
 
-app.use(
-  cors({
-    origin: "https://lexically-react-frontend.vercel.app",
-  })
-);
+app.options("*", cors());
 
 app.get("/redirect", (req, res) => {
   res.redirect(
