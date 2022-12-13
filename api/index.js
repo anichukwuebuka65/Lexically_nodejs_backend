@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const proxy = require("./src/proxy");
+const proxy = require("../src/proxy");
 const cors = require("cors");
 const { default: axios } = require("axios");
 require("dotenv").config();
