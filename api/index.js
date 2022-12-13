@@ -9,19 +9,19 @@ const frontendUrl = "https://lexically-react-frontend.vercel.app/";
 
 app.options("*", cors());
 
-app.get("/redirect", (req, res) => {
+app.get("/api/redirect", (req, res) => {
   res.redirect(
     `https://unsplash.com/oauth/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${backendUrl}/user&response_type=code&scope=public+read_user+read_collections`
   );
 });
 
-app.get("/user", (req, res) => {
+app.get("/api/user", (req, res) => {
   if (req.query.code) {
     axios
       .post("https://unsplash.com/oauth/token", {
         client_id: process.env.CLIENT_ID,
         client_secret: process.env.CLIENT_SECRET,
-        redirect_uri: `${backendUrl}/user`,
+        redirect_uri: `${backendUrl}/api/user`,
         code: req.query.code,
         grant_type: "authorization_code",
       })
@@ -38,8 +38,8 @@ app.get("/user", (req, res) => {
     res.redirect(`${frontendUrl}`);
   }
 });
-app.get("/hello", () => res.send("hello"));
-app.use("*", proxy);
+app.get("/api/hello", () => res.send("hello"));
+app.use("/api/*", proxy);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log("listen on port 5000"));
