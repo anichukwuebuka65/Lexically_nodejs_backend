@@ -9,7 +9,7 @@ const frontendUrl = "https://lexically-react-frontend.vercel.app/";
 
 app.use(
   cors({
-    origin: "*",
+    origin: "https://lexically-react-frontend.vercel.app",
   })
 );
 
